@@ -1,0 +1,41 @@
+services:
+
+    blog_posts_collection:
+        class: MagdKudama\PhaticBlogExtension\Parser\PostsParser
+        arguments: ["@service_container"]
+    blog_pages_collection:
+        class: MagdKudama\PhaticBlogExtension\Parser\PagesParser
+        arguments: ["@service_container"]
+    blog_homepage_collection:
+        class: MagdKudama\PhaticBlogExtension\Parser\HomepageParser
+        arguments: ["@service_container"]
+
+    blog_command_generate_site:
+        class: MagdKudama\PhaticBlogExtension\Command\GenerateSiteCommand
+        tags:
+            - { name: phatic.command }
+
+    blog_processor_page:
+        class: MagdKudama\PhaticBlogExtension\Processor\PageProcessor
+        calls:
+            - [setCollection, ["@blog_pages_collection"]]
+        tags:
+            - { name: phatic.processor }
+    blog_processor_post:
+        class: MagdKudama\PhaticBlogExtension\Processor\PostProcessor
+        calls:
+            - [setCollection, ["@blog_posts_collection"]]
+        tags:
+            - { name: phatic.processor }
+    blog_processor_homepage:
+        class: MagdKudama\PhaticBlogExtension\Processor\HomepageProcessor
+        calls:
+            - [setCollection, ["@blog_homepage_collection"]]
+        tags:
+            - { name: phatic.processor }
+
+    blog_view:
+        class: MagdKudama\PhaticBlogExtension\View\ViewExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: phatic.view }

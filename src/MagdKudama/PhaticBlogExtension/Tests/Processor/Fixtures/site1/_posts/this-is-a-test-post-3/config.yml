@@ -1,0 +1,5 @@
+config:
+    title: 'This is a test post'
+    description: 'This is the post description as it should be'
+    keywords: 'test,post'
+    created_at: '2013-09-20 09:00:00'
