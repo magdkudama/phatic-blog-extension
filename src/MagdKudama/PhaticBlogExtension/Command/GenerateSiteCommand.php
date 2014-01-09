@@ -4,7 +4,8 @@ namespace MagdKudama\PhaticBlogExtension\Command;
 
 use Doctrine\Common\Util\Inflector;
 use MagdKudama\Phatic\AbstractProcessor;
-use MagdKudama\Phatic\AppConfigLoader;
+use MagdKudama\Phatic\Collection\ProcessorCollection;
+use MagdKudama\Phatic\Config\ApplicationConfig;
 use MagdKudama\Phatic\Console\Command\CommandOutputHelper;
 use MagdKudama\Phatic\Console\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,7 +23,7 @@ class GenerateSiteCommand extends ContainerAwareCommand
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        /** @var AppConfigLoader $config */
+        /** @var ApplicationConfig $config */
         $config = $this->getContainer()->get('phatic.config');
         $this->resultSite = $config->getResultsPath();
         $this->postsDirectory = $config->getPostsPath();
@@ -61,6 +62,10 @@ class GenerateSiteCommand extends ContainerAwareCommand
         $this->fileSystem->mirror($this->assetsDirectory, $this->resultSite . 'assets');
 
         $processors = $this->getContainer()->get('phatic.processors');
+        if (!$processors instanceof ProcessorCollection) {
+            CommandOutputHelper::writeError($output, 'Processors errors... :(');
+            return;
+        }
 
         /** @var AbstractProcessor $processor */
         foreach ($processors as $processor) {
