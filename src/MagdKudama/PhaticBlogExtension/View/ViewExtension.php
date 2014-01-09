@@ -51,6 +51,9 @@ class ViewExtension extends Twig_Extension
         return $this->container->getParameter('phatic.blog.base_url');
     }
 
+    /**
+     * @param string $uri
+     */
     public function getUrl($uri)
     {
         $base = $this->getBaseUrl();

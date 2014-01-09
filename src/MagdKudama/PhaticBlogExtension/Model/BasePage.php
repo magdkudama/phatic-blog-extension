@@ -11,11 +11,17 @@ abstract class BasePage
     /** @var SplFileInfo */
     protected $file;
 
+    /**
+     * @param string $pageContent
+     */
     public function setPageContent($pageContent)
     {
         $this->pageContent = $pageContent;
     }
 
+    /**
+     * @return string
+     */
     public function getPageContent()
     {
         return $this->pageContent;
