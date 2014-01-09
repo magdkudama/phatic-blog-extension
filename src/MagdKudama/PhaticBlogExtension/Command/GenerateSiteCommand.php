@@ -77,6 +77,9 @@ class GenerateSiteCommand extends ContainerAwareCommand
         CommandOutputHelper::success($output);
     }
 
+    /**
+     * @param string $message
+     */
     protected function writeHeader(OutputInterface $output, $message)
     {
         CommandOutputHelper::writeComment($output, "");
