@@ -1,0 +1,21 @@
+Deleting results directory...
+Creating results directory...
+Dumping assets...
+
+-----------------------------------
+CREATING PAGES
+-----------------------------------
+
+
+-----------------------------------
+CREATING POSTS
+-----------------------------------
+
+
+-----------------------------------
+CREATING HOMEPAGES
+-----------------------------------
+
+Creating homepage homepage.html...
+
+Command successfully executed!

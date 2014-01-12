@@ -419,12 +419,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/magdkudama/phatic.git",
-                "reference": "508e1d56639cf84df542735da487ed8c8fb94f97"
+                "reference": "41fe42e982f8401990538706de3fd5856fe0851a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magdkudama/phatic/zipball/508e1d56639cf84df542735da487ed8c8fb94f97",
-                "reference": "508e1d56639cf84df542735da487ed8c8fb94f97",
+                "url": "https://api.github.com/repos/magdkudama/phatic/zipball/41fe42e982f8401990538706de3fd5856fe0851a",
+                "reference": "41fe42e982f8401990538706de3fd5856fe0851a",
                 "shasum": ""
             },
             "require": {
@@ -472,7 +472,7 @@
                 "Static page generator",
                 "php"
             ],
-            "time": "2014-01-08 19:44:42"
+            "time": "2014-01-10 17:37:51"
         },
         {
             "name": "mockery/mockery",
@@ -582,12 +582,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "c5c12c8d85ed5f1b4ddca706f1464f9793eaaa0c"
+                "reference": "e7181e997e991930746356dcf4be300723763ed3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/c5c12c8d85ed5f1b4ddca706f1464f9793eaaa0c",
-                "reference": "c5c12c8d85ed5f1b4ddca706f1464f9793eaaa0c",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/e7181e997e991930746356dcf4be300723763ed3",
+                "reference": "e7181e997e991930746356dcf4be300723763ed3",
                 "shasum": ""
             },
             "require": {
@@ -626,7 +626,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-01-07 13:19:25"
+            "time": "2014-01-11 07:44:43"
         },
         {
             "name": "symfony/dependency-injection",

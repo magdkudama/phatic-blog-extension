@@ -23,12 +23,13 @@ class GenerateSiteCommand extends ContainerAwareCommand
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        parent::initialize($input, $output);
+
         /** @var ApplicationConfig $config */
         $config = $this->getContainer()->get('phatic.config');
         $this->resultSite = $config->getResultsPath();
         $this->postsDirectory = $config->getPostsPath();
         $this->assetsDirectory = $config->getAssetsPath();
-
         $this->fileSystem = $this->getFileSystem();
     }
 
@@ -83,7 +84,8 @@ class GenerateSiteCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $message
+     * @param OutputInterface $output
+     * @param $message
      */
     protected function writeHeader(OutputInterface $output, $message)
     {
