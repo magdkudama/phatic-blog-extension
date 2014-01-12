@@ -89,20 +89,4 @@ class GenerateSiteCommandTest extends TestCase
             ['site3'],
         ];
     }
-
-    /*public function testCommandAsksWhenDirectoryAlreadyExists()
-    {
-        $this->commandTester->execute($this->options);
-
-        $dialog = $this->command->getHelper('dialog');
-        $dialog->setInputStream($this->getInputStream("yes\n"));
-
-        $this->commandTester->execute($this->options);
-
-        $this->assertContains(
-            "Directory already exists. Are you sure you want to continue?",
-            $this->commandTester->getDisplay(),
-            'Command asks when folder already exists'
-        );
-    }*/
 }
