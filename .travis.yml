@@ -5,4 +5,4 @@ php:
   - 5.5
 
 before_script:
-  - COMPOSER_ROOT_VERSION=dev-master composer install
+  - COMPOSER_ROOT_VERSION=dev-master composer install --dev
