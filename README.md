@@ -33,8 +33,11 @@ Configure phatic.yml:
     config:
       extensions:
         MagdKudama\PhaticBlogExtension\PhaticBlogExtension:
-          base_url: http://www.myurl.com
-          post_prefix: ~
+          permalink:
+            type: 'date'
+            param: 'Y/m'
+
+You can choose the permalink type, or register your own permalink. The other core permalink type is "prefix".
 
 More documentation is coming...
 
