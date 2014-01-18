@@ -2,30 +2,21 @@
 
 namespace MagdKudama\PhaticBlogExtension\Processor;
 
-use MagdKudama\Phatic\AbstractProcessor;
+use MagdKudama\Phatic\Processor;
 use MagdKudama\PhaticBlogExtension\Event\BasePostEvent;
 use MagdKudama\PhaticBlogExtension\Event\Events;
 use MagdKudama\PhaticBlogExtension\Model\Post;
-use MagdKudama\PhaticBlogExtension\Parser\PostsParser;
+use MagdKudama\PhaticBlogExtension\Parser\BaseParser;
+use MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class PostProcessor extends AbstractProcessor
+class PostProcessor extends BaseProcessor implements Processor
 {
-    private $postPrefix;
-    private $posts;
-
-    public function setPostPrefix($postPrefix)
-    {
-        $this->postPrefix = $postPrefix;
-    }
-
-    public function setCollection(PostsParser $posts)
-    {
-        $this->posts = $posts->read();
-    }
-
     public function getCollection()
     {
-        return $this->posts;
+        /** @var BaseParser $collection */
+        $collection = $this->container->get('blog_posts_collection');
+        return $collection->read();
     }
 
     public function dump($post)
@@ -51,15 +42,14 @@ class PostProcessor extends AbstractProcessor
 
         $post->setPageContent($content);
 
-        if (!empty($this->postPrefix)) {
-            $posts = $this->getConfig()->getResultsPath() . $this->postPrefix . '/' . $post->getSlug();
-        } else {
-            $posts = $this->getConfig()->getResultsPath() . $post->getSlug();
-        }
+        /** @var PermalinkGuesser $permalinkGuesser */
+        $permalinkGuesser = $this->container->get('blog_permalink_guesser');
 
-        $this->getFileSystem()->mkdir($posts);
+        $postPath = $this->getConfig()->getResultsPath() . $permalinkGuesser->getPermalinkForPost($post) . $post->getSlug();
+
+        $this->getFileSystem()->mkdir($postPath);
 
         $this->getDispatcher()->dispatch(Events::BEFORE_POST_CREATED, $event);
-        $this->getFileSystem()->dumpFile($posts . '/index.html', $post->getPageContent());
+        $this->getFileSystem()->dumpFile($postPath . '/index.html', $post->getPageContent());
     }
 }

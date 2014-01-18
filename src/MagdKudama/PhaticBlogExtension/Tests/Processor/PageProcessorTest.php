@@ -29,7 +29,6 @@ class PageProcessorTest extends TestCase
 
         foreach (['site1', 'site2', 'site3'] as $site) {
             $fileSystem->remove(__DIR__ . '/Fixtures/' . $site . '/result/');
-            $fileSystem->mkdir(__DIR__ . '/Fixtures/' . $site . '/result/');
         }
     }
 
@@ -38,24 +37,6 @@ class PageProcessorTest extends TestCase
      */
     public function testDumpMethod($siteName, $expectedResult)
     {
-        $finder = new Finder();
-        $fileSystem = new Filesystem();
-
-        $loader = new Twig_Loader_Filesystem([
-            __DIR__ . '/Fixtures/' . $siteName . '/_pages/',
-            __DIR__ . '/Fixtures/' . $siteName . '/_posts/'
-        ]);
-        $view = new Twig_Environment($loader);
-        $dispatcher = m::mock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $dispatcher
-            ->shouldReceive('dispatch')
-            ->andReturnNull();
-        $appConfig = new ApplicationConfig([
-            'results_path' => __DIR__ . '/Fixtures/' . $siteName . '/result/'
-        ]);
-
-        $processor = new PageProcessor($finder, $fileSystem, $view, $dispatcher, $appConfig);
-
         $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
         $container
             ->shouldReceive('get')
@@ -66,14 +47,55 @@ class PageProcessorTest extends TestCase
             ->shouldReceive('get')
             ->with('phatic.config')
             ->andReturn(new ApplicationConfig([
-                'layouts_path' => __DIR__ . '/Fixtures/' . $siteName . '/_pages/_layouts/',
                 'pages_path' => __DIR__ . '/Fixtures/' . $siteName . '/_pages/'
             ]));
 
 
         $parser = new PagesParser($container);
-        $processor->setCollection($parser);
 
+        $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+        $container
+            ->shouldReceive('get')
+            ->with('phatic.finder')
+            ->andReturn(new Finder());
+        $container
+            ->shouldReceive('get')
+            ->with('phatic.config')
+            ->andReturn(new ApplicationConfig([
+                'results_path' => __DIR__ . '/Fixtures/' . $siteName . '/result/'
+            ]));
+        $container
+            ->shouldReceive('get')
+            ->with('blog_pages_collection')
+            ->andReturn($parser);
+
+        $loader = new Twig_Loader_Filesystem([
+            __DIR__ . '/Fixtures/' . $siteName . '/_pages/',
+            __DIR__ . '/Fixtures/' . $siteName . '/_posts/'
+        ]);
+        $view = new Twig_Environment($loader);
+
+        $container
+            ->shouldReceive('get')
+            ->with('phatic.twig')
+            ->andReturn($view);
+
+        $container
+            ->shouldReceive('get')
+            ->with('phatic.filesystem')
+            ->andReturn(new Filesystem());
+
+        $dispatcher = m::mock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $dispatcher
+            ->shouldReceive('dispatch')
+            ->andReturnNull();
+
+        $container
+            ->shouldReceive('get')
+            ->with('phatic.dispatcher')
+            ->andReturn($dispatcher);
+
+        $processor = new PageProcessor($container);
         foreach ($processor->getCollection() as $element) {
             $processor->dump($element);
         }

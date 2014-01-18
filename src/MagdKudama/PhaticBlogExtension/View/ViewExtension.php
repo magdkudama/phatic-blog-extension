@@ -4,6 +4,7 @@ namespace MagdKudama\PhaticBlogExtension\View;
 
 use DateTime;
 use MagdKudama\PhaticBlogExtension\Model\Post;
+use MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser;
 use MagdKudama\PhaticBlogExtension\Utils;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Twig_Extension;
@@ -52,7 +53,8 @@ class ViewExtension extends Twig_Extension
     }
 
     /**
-     * @param string $uri
+     * @param $uri
+     * @return string
      */
     public function getUrl($uri)
     {
@@ -66,13 +68,10 @@ class ViewExtension extends Twig_Extension
 
     public function getUrlForPost(Post $post)
     {
-        $url = '';
-        $prefix = $this->container->getParameter('phatic.blog.post_prefix', null);
-        if ($prefix != null) {
-            $url .= $prefix . '/';
-        }
+        /** @var PermalinkGuesser $permalinkGuesser */
+        $permalinkGuesser = $this->container->get('blog_permalink_guesser');
 
-        return $this->getUrl($url . $post->getSlug());
+        return $this->getUrl($permalinkGuesser->getPermalinkForPost($post) . $post->getSlug());
     }
 
     public function getPostContentRoute(Post $post)

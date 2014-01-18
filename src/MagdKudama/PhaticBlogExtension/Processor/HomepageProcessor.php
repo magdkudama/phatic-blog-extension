@@ -2,22 +2,18 @@
 
 namespace MagdKudama\PhaticBlogExtension\Processor;
 
-use MagdKudama\Phatic\AbstractProcessor;
+use MagdKudama\Phatic\Processor;
 use MagdKudama\PhaticBlogExtension\Model\Page;
-use MagdKudama\PhaticBlogExtension\Parser\HomepageParser;
+use MagdKudama\PhaticBlogExtension\Parser\BaseParser;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class HomepageProcessor extends AbstractProcessor
+class HomepageProcessor extends BaseProcessor implements Processor
 {
-    private $pages;
-
-    public function setCollection(HomepageParser $pages)
-    {
-        $this->pages = $pages->read();
-    }
-
     public function getCollection()
     {
-        return $this->pages;
+        /** @var BaseParser $collection */
+        $collection = $this->container->get('blog_homepage_collection');
+        return $collection->read();
     }
 
     public function dump($page)

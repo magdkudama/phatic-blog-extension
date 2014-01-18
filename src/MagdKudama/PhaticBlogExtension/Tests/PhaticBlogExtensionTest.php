@@ -17,7 +17,7 @@ class PhaticBlogExtensionTest extends TestCase
     public function setUp()
     {
         $this->extension = new PhaticBlogExtension();
-        $this->builder = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder[getParameter,setParameter]');
+        $this->builder = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder[setParameter]');
     }
 
     public function tearDown()
@@ -29,14 +29,11 @@ class PhaticBlogExtensionTest extends TestCase
     {
         $config = [
             'base_url' => 'test',
-            'post_prefix' => 'prefix'
+            'permalink' => [
+                'type' => 'type',
+                'param' => 'param'
+            ]
         ];
-
-        $this->builder
-            ->shouldReceive('getParameter')
-            ->with('phatic.app_config')
-            ->andReturn(['results_path' => __DIR__ . '/'])
-            ->once();
 
         $this->builder
             ->shouldReceive('setParameter')
@@ -45,12 +42,7 @@ class PhaticBlogExtensionTest extends TestCase
 
         $this->builder
             ->shouldReceive('setParameter')
-            ->with('phatic.blog.post_prefix', 'prefix')
-            ->once();
-
-        $this->builder
-            ->shouldReceive('setParameter')
-            ->with('phatic.blog.results_posts_path', __DIR__ . '/prefix/')
+            ->with('phatic.blog.permalink_options', ['type' => 'type', 'param' => 'param/'])
             ->once();
 
         $this->extension->load($config, $this->builder);

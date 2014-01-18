@@ -2,4 +2,6 @@ config:
   extensions:
     MagdKudama\PhaticBlogExtension\PhaticBlogExtension:
       base_url: http://www.magd.com
-      post_prefix: ~
+      permalink:
+        type: 'prefix'
+        param: ~

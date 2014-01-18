@@ -17,20 +17,17 @@ services:
 
     blog_processor_page:
         class: MagdKudama\PhaticBlogExtension\Processor\PageProcessor
-        calls:
-            - [setCollection, ["@blog_pages_collection"]]
+        arguments: ["@service_container"]
         tags:
             - { name: phatic.processor }
     blog_processor_post:
         class: MagdKudama\PhaticBlogExtension\Processor\PostProcessor
-        calls:
-            - [setCollection, ["@blog_posts_collection"]]
+        arguments: ["@service_container"]
         tags:
             - { name: phatic.processor }
     blog_processor_homepage:
         class: MagdKudama\PhaticBlogExtension\Processor\HomepageProcessor
-        calls:
-            - [setCollection, ["@blog_homepage_collection"]]
+        arguments: ["@service_container"]
         tags:
             - { name: phatic.processor }
 
@@ -39,3 +36,19 @@ services:
         arguments: ["@service_container"]
         tags:
             - { name: phatic.view }
+
+    phatic_blog.permalinks:
+        class: MagdKudama\PhaticBlogExtension\Collection\PermalinkCollection
+
+    blog_permalink_date:
+        class: MagdKudama\PhaticBlogExtension\Permalink\DatePermalink
+        tags:
+            - { name: phatic_blog.permalink }
+    blog_permalink_prefix:
+        class: MagdKudama\PhaticBlogExtension\Permalink\PrefixPermalink
+        tags:
+            - { name: phatic_blog.permalink }
+
+    blog_permalink_guesser:
+        class: MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser
+        arguments: ["@phatic_blog.permalinks", "%phatic.blog.permalink_options%"]

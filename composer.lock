@@ -429,12 +429,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/magdkudama/phatic.git",
-                "reference": "2df74d09e88180302b5816f7b12878709ddefbaa"
+                "reference": "2f19b366b467aa308910dd501659e867c4827208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magdkudama/phatic/zipball/2df74d09e88180302b5816f7b12878709ddefbaa",
-                "reference": "2df74d09e88180302b5816f7b12878709ddefbaa",
+                "url": "https://api.github.com/repos/magdkudama/phatic/zipball/2f19b366b467aa308910dd501659e867c4827208",
+                "reference": "2f19b366b467aa308910dd501659e867c4827208",
                 "shasum": ""
             },
             "require": {
@@ -488,7 +488,7 @@
                 "Static page generator",
                 "php"
             ],
-            "time": "2014-01-12 21:48:28"
+            "time": "2014-01-13 20:25:54"
         },
         {
             "name": "symfony/config",

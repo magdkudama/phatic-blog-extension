@@ -2,7 +2,12 @@
 
 namespace MagdKudama\PhaticBlogExtension\Tests\View;
 
+use MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser;
+use Mockery as m;
+use MagdKudama\PhaticBlogExtension\Collection\PermalinkCollection;
 use MagdKudama\PhaticBlogExtension\Model\Post;
+use MagdKudama\PhaticBlogExtension\Permalink\DatePermalink;
+use MagdKudama\PhaticBlogExtension\Permalink\PrefixPermalink;
 use MagdKudama\PhaticBlogExtension\View\ViewExtension;
 use MagdKudama\Phatic\Tests\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -48,9 +53,27 @@ class ViewExtensionTest extends TestCase
      */
     public function testGetUrlForPostMethod($prefix, $expected)
     {
-        $this->container->setParameter('phatic.blog.base_url', 'http://myurl.com');
-        $this->container->setParameter('phatic.blog.post_prefix', $prefix);
-        $extension = new ViewExtension($this->container);
+        $permalinkCollection = new PermalinkCollection();
+        $permalinkCollection->add(new DatePermalink());
+        $permalinkCollection->add(new PrefixPermalink());
+
+        $guesser = new PermalinkGuesser($permalinkCollection, [
+            'type' => 'prefix',
+            'param' => $prefix
+        ]);
+
+        $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+        $container
+            ->shouldReceive('get')
+            ->with('blog_permalink_guesser')
+            ->andReturn($guesser);
+
+        $container
+            ->shouldReceive('getParameter')
+            ->with('phatic.blog.base_url')
+            ->andReturn('http://myurl.com');
+
+        $extension = new ViewExtension($container);
 
         $post = new Post();
         $post->setSlug('slug');
@@ -113,7 +136,7 @@ class ViewExtensionTest extends TestCase
     public function urlForPostProvider()
     {
         return [
-            ['post', 'http://myurl.com/post/slug'],
+            ['post/', 'http://myurl.com/post/slug'],
             [null, 'http://myurl.com/slug'],
         ];
     }
