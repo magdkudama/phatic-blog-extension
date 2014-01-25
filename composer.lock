@@ -429,12 +429,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/magdkudama/phatic.git",
-                "reference": "2f19b366b467aa308910dd501659e867c4827208"
+                "reference": "52cf1566b3e7d8f99d7ee4c3d29f1c954abd43e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/magdkudama/phatic/zipball/2f19b366b467aa308910dd501659e867c4827208",
-                "reference": "2f19b366b467aa308910dd501659e867c4827208",
+                "url": "https://api.github.com/repos/magdkudama/phatic/zipball/52cf1566b3e7d8f99d7ee4c3d29f1c954abd43e7",
+                "reference": "52cf1566b3e7d8f99d7ee4c3d29f1c954abd43e7",
                 "shasum": ""
             },
             "require": {
@@ -488,7 +488,7 @@
                 "Static page generator",
                 "php"
             ],
-            "time": "2014-01-13 20:25:54"
+            "time": "2014-01-13 20:39:37"
         },
         {
             "name": "symfony/config",
@@ -711,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/expression-language.git",
-                "reference": "91dff071f3f0b5f33566136fbde5e486f64fb2e1"
+                "reference": "0960b602e6ee8a812667fe2f52268c50898c3c8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/expression-language/zipball/91dff071f3f0b5f33566136fbde5e486f64fb2e1",
-                "reference": "91dff071f3f0b5f33566136fbde5e486f64fb2e1",
+                "url": "https://api.github.com/repos/symfony/expression-language/zipball/0960b602e6ee8a812667fe2f52268c50898c3c8b",
+                "reference": "0960b602e6ee8a812667fe2f52268c50898c3c8b",
                 "shasum": ""
             },
             "require": {
@@ -749,7 +749,7 @@
             ],
             "description": "Symfony ExpressionLanguage Component",
             "homepage": "http://symfony.com",
-            "time": "2013-12-31 14:17:39"
+            "time": "2014-01-24 14:36:35"
         },
         {
             "name": "symfony/filesystem",
@@ -898,12 +898,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "ae89c8853582f074c1e8f26ac3b67b2c4fff2609"
+                "reference": "9ed963c99d0e5f10eeeb1a135d80389f4a56d866"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/ae89c8853582f074c1e8f26ac3b67b2c4fff2609",
-                "reference": "ae89c8853582f074c1e8f26ac3b67b2c4fff2609",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/9ed963c99d0e5f10eeeb1a135d80389f4a56d866",
+                "reference": "9ed963c99d0e5f10eeeb1a135d80389f4a56d866",
                 "shasum": ""
             },
             "require": {
@@ -939,7 +939,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-01-08 07:21:35"
+            "time": "2014-01-24 15:03:15"
         }
     ],
     "packages-dev": [
@@ -1002,12 +1002,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "10c5b2c8b72a801eaad0031cd6a6a3686909c5a9"
+                "reference": "6f5fe28389462fbfe9420ddbcc734be4691424f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/10c5b2c8b72a801eaad0031cd6a6a3686909c5a9",
-                "reference": "10c5b2c8b72a801eaad0031cd6a6a3686909c5a9",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6f5fe28389462fbfe9420ddbcc734be4691424f5",
+                "reference": "6f5fe28389462fbfe9420ddbcc734be4691424f5",
                 "shasum": ""
             },
             "require": {
@@ -1055,7 +1055,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-11-01 09:17:11"
+            "time": "2014-01-25 07:52:49"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1246,12 +1246,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5b150a8229d645aeea49546284bf74cc561a1182"
+                "reference": "641cd682a2cdd8c7dd7b018741f33b44d5b2ce0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5b150a8229d645aeea49546284bf74cc561a1182",
-                "reference": "5b150a8229d645aeea49546284bf74cc561a1182",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/641cd682a2cdd8c7dd7b018741f33b44d5b2ce0f",
+                "reference": "641cd682a2cdd8c7dd7b018741f33b44d5b2ce0f",
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1312,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-01-11 08:28:18"
+            "time": "2014-01-25 07:51:18"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1320,12 +1320,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "3e40f3b3f18c044a24688fe406440d7fd537744a"
+                "reference": "3f042938df71fb44ee4775d6757c9659ea485994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3e40f3b3f18c044a24688fe406440d7fd537744a",
-                "reference": "3e40f3b3f18c044a24688fe406440d7fd537744a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3f042938df71fb44ee4775d6757c9659ea485994",
+                "reference": "3f042938df71fb44ee4775d6757c9659ea485994",
                 "shasum": ""
             },
             "require": {
@@ -1333,7 +1333,6 @@
                 "phpunit/php-text-template": ">=1.1.1@stable"
             },
             "require-dev": {
-                "pear-pear/pear": "1.9.4",
                 "phpunit/phpunit": "3.7.*@dev"
             },
             "suggest": {
@@ -1370,7 +1369,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2013-07-23 04:42:59"
+            "time": "2014-01-25 10:04:01"
         }
     ],
     "aliases": [
