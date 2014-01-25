@@ -90,6 +90,16 @@ class HomepageProcessorTest extends TestCase
                 'results_path' => __DIR__ . '/Fixtures/site1/result/'
             ]));
 
+        $dispatcher = m::mock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $dispatcher
+            ->shouldReceive('dispatch')
+            ->andReturnNull();
+
+        $this->container
+            ->shouldReceive('get')
+            ->with('phatic.dispatcher')
+            ->andReturn($dispatcher);
+
         $this->processor = new HomepageProcessor($this->container);
         foreach ($this->processor->getCollection() as $element) {
             $this->processor->dump($element);
