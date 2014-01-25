@@ -104,6 +104,8 @@ class ViewExtension extends Twig_Extension
 
     public function summarize($text, $quantity)
     {
+        $text = strip_tags($text);
+
         if (strlen($text) <= $quantity) {
             return $text;
         }
