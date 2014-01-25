@@ -2,8 +2,8 @@
 
 namespace MagdKudama\PhaticBlogExtension\Tests\View;
 
-use MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser;
 use Mockery as m;
+use MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser;
 use MagdKudama\PhaticBlogExtension\Collection\PermalinkCollection;
 use MagdKudama\PhaticBlogExtension\Model\Post;
 use MagdKudama\PhaticBlogExtension\Permalink\DatePermalink;
@@ -15,17 +15,35 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class ViewExtensionTest extends TestCase
 {
-    /** @var ContainerBuilder */
     protected $container;
 
     public function setUp()
     {
-        $this->container = new ContainerBuilder();
+        $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+
+        $baseMock = m::mock('MagdKudama\Phatic\Parser\BaseParser');
+        $baseMock->shouldReceive('read')
+            ->andReturnNull();
+
+        $container->shouldReceive('get')
+            ->with('blog_posts_collection')
+            ->once()
+            ->andReturn($baseMock);
+        $container->shouldReceive('get')
+            ->with('blog_pages_collection')
+            ->once()
+            ->andReturn($baseMock);
+
+        $this->container = $container;
     }
 
     public function testBaseUrlMethod()
     {
-        $this->container->setParameter('phatic.blog.base_url', 'http://myurl.com');
+        $this->container->shouldReceive('getParameter')
+            ->with('phatic.blog.base_url')
+            ->once()
+            ->andReturn('http://myurl.com');
+
         $extension = new ViewExtension($this->container);
 
         $this->assertEquals(
@@ -39,7 +57,11 @@ class ViewExtensionTest extends TestCase
      */
     public function testGetUrlMethod($url)
     {
-        $this->container->setParameter('phatic.blog.base_url', $url);
+        $this->container->shouldReceive('getParameter')
+            ->with('phatic.blog.base_url')
+            ->once()
+            ->andReturn($url);
+
         $extension = new ViewExtension($this->container);
 
         $this->assertEquals(
@@ -103,7 +125,11 @@ class ViewExtensionTest extends TestCase
      */
     public function testAssetMethod($asset, $expected)
     {
-        $this->container->setParameter('phatic.blog.base_url', 'http://myurl.com');
+        $this->container->shouldReceive('getParameter')
+            ->with('phatic.blog.base_url')
+            ->once()
+            ->andReturn('http://myurl.com');
+
         $extension = new ViewExtension($this->container);
 
         $this->assertEquals(

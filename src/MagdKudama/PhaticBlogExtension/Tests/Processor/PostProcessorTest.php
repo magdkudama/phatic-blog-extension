@@ -81,14 +81,19 @@ class PostProcessorTest extends TestCase
         ]);
         $view = new Twig_Environment($loader);
         $viewContainer = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
+
+        $baseMock = m::mock('MagdKudama\PhaticBlogExtension\Parser\BaseParser');
+        $baseMock->shouldReceive('read')
+            ->andReturnNull();
+
         $viewContainer
             ->shouldReceive('get')
             ->with('blog_posts_collection')
-            ->andReturnNull();
+            ->andReturn($baseMock);
         $viewContainer
             ->shouldReceive('get')
             ->with('blog_pages_collection')
-            ->andReturnNull();
+            ->andReturn($baseMock);
         $view->addExtension(new ViewExtension($viewContainer));
 
         $container

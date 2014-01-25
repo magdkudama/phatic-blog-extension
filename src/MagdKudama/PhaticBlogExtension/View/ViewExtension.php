@@ -4,6 +4,7 @@ namespace MagdKudama\PhaticBlogExtension\View;
 
 use DateTime;
 use MagdKudama\PhaticBlogExtension\Model\Post;
+use MagdKudama\PhaticBlogExtension\Parser\BaseParser;
 use MagdKudama\PhaticBlogExtension\Permalink\PermalinkGuesser;
 use MagdKudama\PhaticBlogExtension\Utils;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,9 +34,14 @@ class ViewExtension extends Twig_Extension
 
     public function getGlobals()
     {
+        /** @var BaseParser $postsReader */
+        $postsReader = $this->container->get('blog_posts_collection');
+        /** @var BaseParser $postsReader */
+        $pagesReader = $this->container->get('blog_pages_collection');
+
         return [
-            $this->container->get('blog_posts_collection'),
-            $this->container->get('blog_pages_collection')
+            'posts' => $postsReader->read(),
+            'pages' => $pagesReader->read()
         ];
     }
 
